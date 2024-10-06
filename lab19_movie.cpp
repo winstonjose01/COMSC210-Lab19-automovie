@@ -4,6 +4,7 @@
 
 # include <iostream>
 # include <fstream>
+# include <vector>
 using namespace std;
 
 
@@ -14,6 +15,7 @@ class Movie {
             double val;
             string comment;
             Node *next;
+            // 
         };
         Node * head;
     public:
@@ -21,6 +23,14 @@ class Movie {
         Movie(){
             movietitle = "";
             head = nullptr;
+
+        void add_node_front(double rating, string com){
+            Node *newNode = new Node;
+
+
+
+
+        }
 
     }
 
@@ -38,7 +48,19 @@ int main(){
     string filename = "reviewsfile.txt";
     string line = "";
     vector <Movie> movie_vect;
+    vector <string> comments;  // Vector to hold comments 
 
+    if (openfile(f,filename) !=  1){
+        exit (-1);
+    }
+
+    string movietitles[4] = {}
+
+    while (getline(f,line)){        // Stoe all comments tothe vectors
+        comments.push_back(line);
+    }
+    
+    for i
 
     return 0;
 }
