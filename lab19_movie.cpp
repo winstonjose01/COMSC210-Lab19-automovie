@@ -32,13 +32,24 @@ class Movie {
 };
 
 
-int main{
+int main(){
+    
+    fstream f;
+    string filename = "reviewsfile.txt";
+    string line = "";
+    vector <Movie> movie_vect;
 
 
     return 0;
 }
 
 
-int openfile(fstream &f, string filenames)
-{}
+int openfile(fstream &f, string filenames){
+    if(!f){
+        cout << "\nError opening file. Aborting program\n";
+        return 0;
+    } 
+    else 
+        return 1;
+}
 
