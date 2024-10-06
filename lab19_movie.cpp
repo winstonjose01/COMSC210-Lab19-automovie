@@ -9,11 +9,12 @@
 # include <iomanip>
 using namespace std;
 
-const double RATING_MIN = 1.0;
-const double RATING_MAX = 5.0;
+
 
 class Movie {
     private:
+        const double RATING_MIN = 1.0;
+        const double RATING_MAX = 5.0;
         string movietitle;
         struct Node {
             double val;
@@ -43,7 +44,7 @@ class Movie {
         double getrating(){
             random_device seed;
             mt19937 gen(seed());
-            uniform_int_distribution<> rating(RATING_MIN,RATNG);
+            uniform_real_distribution<> rating(RATING_MIN, RATING_MAX);
             return (rating(gen));
 
         }
@@ -64,6 +65,7 @@ class Movie {
         }
 
     };
+    
 
 // Function prototype
 int openfile (fstream &f, string filename );
