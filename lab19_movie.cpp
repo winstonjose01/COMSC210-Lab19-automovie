@@ -62,10 +62,11 @@ class Movie {
                 cout << "Review list is empty.";
                 exit (0);
             }
-            Node *current = head;   // Start 
+            Node *current = head;   // Start at the head of the list
+            // Traverse the link list and print each review
             while (current){
                 cout << "\tRating : " << fixed << setprecision(1) << current->val << " | Comment :" << current->comment << endl; 
-                current = current->next;
+                current = current->next;    // Move to the next node
             }
             cout << endl;
 
@@ -75,50 +76,57 @@ class Movie {
     
 
 // Function prototype
+// Function to open a file and return a status code (1 for success, 0 for failure)
 int openfile (fstream &f, string filename );
 
 int main(){
     
-    fstream f;
-    string filename = "reviewsfile.txt";
-    string line = "";
-    vector <Movie> movie_vect;
-    vector <string> comments;  // Vector to hold comments 
+    fstream f;                              // Filestream objects
+    string filename = "reviewsfile.txt";    // Input file for review comments
+    string line = "";                       // Temporary variable to store comments s
+    vector <Movie> movie_vect;              // Vector to store Movie objects
+    vector <string> comments;               // Vector to store comments from file
 
     if (openfile(f,filename) !=  1){
         exit (-1);
     }
-
+    // Array of movie titles for testing
     string movietitles[4] = {"Lord of the Rings", "Raiders of the Lost Ark", "Mission Impossible", "John Wick"};
-
-    while (getline(f,line)){        // Stoe all comments tothe vectors
+    // Open the review comment file
+    while (getline(f,line)){        
         comments.push_back(line);
     }
-
+    // Read each line (review comment) from the file and store it in the comments vector
     for (int i = 0; i < 4; i++){
         Movie movietemp;
         movietemp.settitle(movietitles[i]);
-
+        
+        // Random generator setup to select random comments from the comments vector
         random_device seed;
         mt19937 gen(seed());
         uniform_int_distribution<> comm_dist(0, comments.size() -1);
 
+        // Loop to add 4 reviews for each movie
         for (int j = 0; j < 4; j++){
-            double temprating = movietemp.getrating();
-            string random_comments = comments[comm_dist(gen)];
-            movietemp.add_node_front(temprating,random_comments);
+            double temprating = movietemp.getrating();      // Generate random rating
+            string random_comments = comments[comm_dist(gen)]; // Select a random comment
+            movietemp.add_node_front(temprating,random_comments); // Add review node to the movie's linked list
         }
-        movie_vect.push_back(movietemp);
+        movie_vect.push_back(movietemp);  // Add the movie object to the movie vector
     }
+
+    // Loop to print all reviews for each movie in the vector
     for (Movie m : movie_vect){
         m.print_reviews();
     }
-    
+    // Close the file stream
     f.close();
     return 0;
 }
 
-
+// Function to open a file and check for errors
+// arguments: filestream and filename
+// returns: integer (1 for success, 0 for failure)
 int openfile(fstream &f, string filename){
     f.open(filename, ios::in);
     if(!f){
