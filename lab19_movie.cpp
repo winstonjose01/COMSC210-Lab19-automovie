@@ -100,8 +100,8 @@ int main(){
             double temprating = movietemp.getrating();
             string random_comments = comments[comm_dist(gen)];
             movietemp.add_node_front(temprating,random_comments);
-            movie_vect.push_back(movietemp);
         }
+        movie_vect.push_back(movietemp);
     }
     for (Movie m : movie_vect){
         m.print_reviews();
