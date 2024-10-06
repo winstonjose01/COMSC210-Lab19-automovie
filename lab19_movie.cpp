@@ -15,7 +15,10 @@ class Movie {
             double val;
             string comment;
             Node *next;
-            // 
+            // Node constructor
+            Node (double v, string c){
+                val = v; comment = c; next = nullptr;
+            }
         };
         Node * head;
     public:
@@ -23,24 +26,17 @@ class Movie {
         Movie(){
             movietitle = "";
             head = nullptr;
-
+        }
         void add_node_front(double rating, string com){
-            Node *newNode = new Node;
-
-
-
-
+            Node *newNode = new Node (rating, com);
+            newNode->next = head;
+            head = newNode;
         }
 
-    }
+    };
 
-    
-
-
-
-
-};
-
+// Function prototype
+int openfile (fstream &, string );
 
 int main(){
     
@@ -54,7 +50,7 @@ int main(){
         exit (-1);
     }
 
-    string movietitles[4] = {}
+    string movietitles[4] = {"Lord of the Rings", "Raiders of the Lost Ark", "Mission Impossible", "John Wick"};
 
     while (getline(f,line)){        // Stoe all comments tothe vectors
         comments.push_back(line);
