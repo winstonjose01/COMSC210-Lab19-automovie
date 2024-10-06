@@ -60,7 +60,7 @@ class Movie {
             // Check if the linked list is empty
             if (!head){
                 cout << "Review list is empty.";
-                exit (0);
+                return;
             }
             Node *current = head;   // Start at the head of the list
             // Traverse the link list and print each review
@@ -90,18 +90,25 @@ int main(){
     if (openfile(f,filename) !=  1){
         exit (-1);
     }
+
     // Array of movie titles for testing
     string movietitles[4] = {"Lord of the Rings", "Raiders of the Lost Ark", "Mission Impossible", "John Wick"};
-    // Open the review comment file
+    // Read all review comments from the file and store them in the comments vector
     while (getline(f,line)){        
         comments.push_back(line);
     }
+    // Verify file has contents.
+    if (comments.empty()){
+        cout << "No comments available in the file. Aborting program." << endl;
+        return (-1);
+    }
+
     // Read each line (review comment) from the file and store it in the comments vector
     for (int i = 0; i < 4; i++){
         Movie movietemp;
         movietemp.settitle(movietitles[i]);
         
-        // Random generator setup to select random comments from the comments vector
+        // Set up random generator to randomly select a comment from the comments vector
         random_device seed;
         mt19937 gen(seed());
         uniform_int_distribution<> comm_dist(0, comments.size() -1);
