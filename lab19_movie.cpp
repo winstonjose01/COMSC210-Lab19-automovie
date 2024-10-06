@@ -5,6 +5,7 @@
 # include <iostream>
 # include <fstream>
 # include <vector>
+# include <random>
 using namespace std;
 
 
@@ -36,6 +37,13 @@ class Movie {
             movietitle = title;
         }
 
+        double getrating(){
+            random_device seed;
+            mt19937 gen(seed());
+            uniform_int_distribution<> rating(0,5);
+            return (rating(gen));
+
+        }
 
     };
 
@@ -64,9 +72,13 @@ int main(){
         Movie movietemp;
         movietemp.settitle(movietitles[i]);
 
+        random_device seed;
+        mt19937 gen(seed());
+        uniform_int_distribution<> comm_dist(0, comments.size() -1);
 
         for (int j = 0; j < 4; j++){
-            double tem
+            double temprating = movietemp.getrating();
+            string random_comments = comments[comm_dist(gen)];
         }
 
     }
