@@ -6,8 +6,11 @@
 # include <fstream>
 # include <vector>
 # include <random>
+# include <iomanip>
 using namespace std;
 
+const double RATING_MIN = 1.0;
+const double RATING_MAX = 5.0;
 
 class Movie {
     private:
@@ -40,13 +43,23 @@ class Movie {
         double getrating(){
             random_device seed;
             mt19937 gen(seed());
-            uniform_int_distribution<> rating(0,5);
+            uniform_int_distribution<> rating(RATING_MIN,RATNG);
             return (rating(gen));
 
         }
 
         void print_reviews(){
-            cout << "Reviews for "
+            cout << "Reviews for " << movietitle << endl;
+            if (!head){
+                cout << "Review list is empty.";
+                exit (0);
+            }
+            Node *current = head;
+            while (current){
+                cout << "\tRating : " << fixed << setprecision(2) << current->val << " | Comment :" << current->comment << endl; 
+                current = current->next;
+            }
+            cout << endl;
 
         }
 
@@ -92,7 +105,7 @@ int main(){
         m.print_reviews();
     }
     
-    fclose();
+    f.close();
     return 0;
 }
 
