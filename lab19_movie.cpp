@@ -32,11 +32,15 @@ class Movie {
             newNode->next = head;
             head = newNode;
         }
+        void settitle(string title){
+            movietitle = title;
+        }
+
 
     };
 
 // Function prototype
-int openfile (fstream &, string );
+int openfile (fstream &f, string filename );
 
 int main(){
     
@@ -55,14 +59,26 @@ int main(){
     while (getline(f,line)){        // Stoe all comments tothe vectors
         comments.push_back(line);
     }
+
+    for (int i = 0; i < 4; i++){
+        Movie movietemp;
+        movietemp.settitle(movietitles[i]);
+
+
+        for (int j = 0; j < 4; j++){
+            double tem
+        }
+
+    }
     
-    for i
+    
 
     return 0;
 }
 
 
-int openfile(fstream &f, string filenames){
+int openfile(fstream &f, string filename){
+    f.open(filename, ios::in);
     if(!f){
         cout << "\nError opening file. Aborting program\n";
         return 0;
